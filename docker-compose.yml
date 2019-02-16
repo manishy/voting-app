@@ -6,6 +6,8 @@ services:
       - "80:80"
     networks:
       - frontend
+    depends_on: 
+      - redis
     deploy:
       replicas: 3
   
@@ -13,6 +15,8 @@ services:
     image: redis:3.2
     networks:
       - frontend
+    depends_on: 
+      - worker
     deploy:
       replicas: 1
     
@@ -41,6 +45,8 @@ services:
       - "5001:80"
     networks: 
       - backend
+    depends_on: 
+      - db
     deploy:
       replicas: 1
 
@@ -50,31 +56,3 @@ volumes:
 networks:
   frontend:
   backend:
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # volumes: 
-    #   - data_base:/var/lib/postgresql/data
